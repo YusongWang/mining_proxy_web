@@ -16,7 +16,6 @@
       {{current_server.config.name}}
     </div> -->
 
-
     <el-table
       v-loading="listLoading"
       :data="current_server.workers"
@@ -45,13 +44,23 @@
           {{ scope.row.share_index }}
         </template>
       </el-table-column>
-      <el-table-column class-name="status-col" label="接受份额" width="110" align="center">
+      <el-table-column
+        class-name="status-col"
+        label="接受份额"
+        width="110"
+        align="center"
+      >
         <template slot-scope="scope">
           {{ scope.row.accept_index }}
         </template>
       </el-table-column>
 
-      <el-table-column align="center" prop="created_at" label="拒绝份额" width="200">
+      <el-table-column
+        align="center"
+        prop="created_at"
+        label="拒绝份额"
+        width="200"
+      >
         <template slot-scope="scope">
           <i class="el-icon-time" />
           <span>{{ scope.row.invalid_index }}</span>
@@ -67,16 +76,28 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      list: ["22220", "22005"],
+      list: [],
       listLoading: false,
       current_server: {
-        'config':{},
-        'workers':[]
+        config: {},
+        workers: [],
       },
     };
   },
-  onMounted() {
+  created() {
     console.log("init");
+    this.loading = true;
+    this.$store
+      .dispatch("user/server_list")
+      .then((data) => {
+        this.loading = false
+        this.list = data
+        this.handleSelect(data[0],"")
+        this.activeIndex = data[0]
+      })
+      .catch(() => {
+        this.loading = false;
+      });
   },
   methods: {
     handleSelect(key, keyPath) {
@@ -85,20 +106,16 @@ export default {
       // console.log(a);
       this.loading = true;
       this.$store
-        .dispatch("user/server_list", key)
+        .dispatch("user/server", key)
         .then((data) => {
           //this.$router.push({ path: this.redirect || '/' })
-          this.loading = false
-          console.log(data)
-          this.current_server = data
-
-          this.current_server
+          this.loading = false;
+          this.current_server = data;
         })
         .catch(() => {
-          this.loading = false
+          this.loading = false;
         });
-
-      this.$message("submit!");
+      //this.$message("submit!");
     },
     onCancel() {
       console.log("onCancel");

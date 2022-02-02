@@ -7,3 +7,10 @@ export function getServerInfo(name) {
       method: 'get'
     })
 }
+
+export function getServerList() {
+  return request({
+    url: 'user/server_list',
+    method: 'get'
+  })
+}

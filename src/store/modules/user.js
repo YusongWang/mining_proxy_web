@@ -1,7 +1,7 @@
 import { login, logout, getInfo,crate_proxy} from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter } from '@/router'
-import { getServerInfo } from "@/api/server";
+import { getServerInfo,getServerList } from "@/api/server";
 
 
 const getDefaultState = () => {
@@ -84,7 +84,24 @@ const actions = {
       })
     })
   },
-  server_list({commit},data) {
+  server_list({commit}) {
+    console.log("hit ");
+    return new Promise((resolve, reject) => {
+      getServerList().then(response => {
+        const { data } = response
+
+        if (!data) {
+          return reject('Verification failed, please Login again.')
+        }
+
+        console.log(data)
+        resolve(data)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+  server({commit},data) {
     console.log("hit ");
     return new Promise((resolve, reject) => {
       console.log(data)
