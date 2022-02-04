@@ -3,7 +3,10 @@
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
       <div class="title-container">
-        <h3 class="title">MiningProxy 系统登录</h3>
+        <div>
+          <img src="@/assets/logo_cover.png" alt="logo" width="100%">
+        </div>
+        <h3 class="title" style="margin-top:20px;">系统登录</h3>
       </div>
 
       <el-form-item prop="password">
