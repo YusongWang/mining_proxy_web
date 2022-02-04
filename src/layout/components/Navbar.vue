@@ -6,7 +6,10 @@
 
     <div class="right-menu">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+
+          <avatar>
+          <img src="@/assets/logo.png" class="user-avatar" width="80" height="80">
+          </avatar>
         </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: 'MiningProxy 为中国旷工而生',
 
   /**
    * @type {boolean} true | false
