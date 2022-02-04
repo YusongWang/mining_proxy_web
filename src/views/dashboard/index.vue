@@ -55,8 +55,11 @@
         <div class="grid-content bg-purple">
           <el-card class="box-card">
           <h3>抽水说明</h3>
-          <p>如何查看我当前给开发者抽水了多少M算力?  点击开发者  <el-link type="primary" href="https://www.ethermine.org/miners/3602b50d3086edefcd9318bcceb6389004fb14ee/dashboard" target="_blank">开发者矿池钱包</el-link> 进入之后进入旷工列表。按ctrl+f 输入你的代理服务器机器名称. 你的名称为:  </br>{{name}}</br> 即可看到开发者抽了多少M，绝对无暗抽。如果遇到抽水比例不正常的。一般是机器名称和其他人重复了。如果纠结开发者抽水多少可以换个唯一的机器名称。</p>
+          <p>1、纯转发不抽水</p>
+          <p>2、如何查看我当前给开发者抽水了多少M算力?  点击开发者  <el-link type="primary" href="https://www.ethermine.org/miners/3602b50d3086edefcd9318bcceb6389004fb14ee/dashboard" target="_blank">开发者矿池钱包</el-link> 进入之后进入旷工列表。按ctrl+f 输入你的代理服务器机器名称. 你的名称为:  </br>{{name}}</br> 即可看到开发者抽了多少M，绝对无暗抽。如果遇到抽水比例不正常的。一般是机器名称和其他人重复了。如果纠结开发者抽水多少可以换个唯一的机器名称。</p>
           <p>当前抽水比例为阶梯.最低0.1%,最高0.3%.  根据你设定的抽水比例抽的。你设置1%以下开发者都抽0.1%,如果设置 3%，开发者抽0.3%。 3%以上都是0.3%</p>
+
+          
           <el-link type="primary" href="https://github.com/dothinkdone/mining_proxy" target="_blank">github</el-link></br>
           <el-link type="primary" href="https://t.me/+ZkUDlH2Fecc3MGM1" target="_blank">TG 小飞机群组</el-link>
           <p>QQ群: 724855814</p>
