@@ -6,9 +6,7 @@
 
     <div class="right-menu">
         <div class="avatar-wrapper">
-          <avatar>
-          <img src="@/assets/logo.png" class="user-avatar" width="80" height="80">
-          </avatar>
+          <img src="@/assets/logo.png" class="user-avatar" width="80" style="margin-top:10px;">
         </div>
     </div>
   </div>
