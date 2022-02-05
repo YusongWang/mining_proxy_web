@@ -28,7 +28,7 @@ export function crate_proxy(data) {
   data.tcp_port = parseInt(data.tcp_port)
   data.encrypt_port = parseInt(data.encrypt_port)
   data.share = parseInt(data.share)
-  data.share_rate = parseInt(data.share_rate)
+  data.share_rate = parseFloat(data.share_rate)
 
   return request({
     url: '/crate/app',

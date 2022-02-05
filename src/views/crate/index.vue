@@ -76,16 +76,16 @@
 
           <el-col :span="12" :offset="6" v-if="active == 3">
             <!-- 抽水钱包设置 -->
-            <el-form-item label="抽水矿池">
+            <el-form-item label="抽水矿池(格式tcp://IP:端口)">
               <el-input v-model="form.share_address" />
             </el-form-item>
 
-            <el-form-item label="抽水钱包">
+            <el-form-item label="抽水钱包(包含0x部分)">
               <el-input v-model="form.share_wallet" />
             </el-form-item>
 
-            <el-form-item label="抽水比例%">
-              <el-input v-model="form.share_rate" type="number" />
+            <el-form-item label="抽水百分比(0-100%) 支持一位小数">
+              <el-input v-model="form.share_rate" type="float" />
             </el-form-item>
 
             <el-form-item>
@@ -133,7 +133,7 @@ export default {
         },
       ],
       form: {
-        name: "ProxyFee",
+        name: "MiningProxy",
         coin: undefined,
         tcp_port: 0,
         ssl_port: 0,
