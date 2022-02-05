@@ -19,7 +19,7 @@
           v-model="loginForm.password"
           :type="passwordType"
           placeholder="密码"
-          name="密码"
+          name="password"
           tabindex="2"
           auto-complete="on"
           @keyup.enter.native="handleLogin"
@@ -87,6 +87,7 @@ export default {
             this.$router.push({ path: this.redirect || '/' })
             this.loading = false
           }).catch(() => {
+            this.loginForm.password = ''
             this.loading = false
           })
         } else {

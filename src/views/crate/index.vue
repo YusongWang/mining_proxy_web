@@ -1,104 +1,201 @@
 <template>
   <div class="app-container">
-    <el-form ref="form" :model="form" label-width="120px">
-      <el-form-item label="名称">
-        <el-input v-model="form.name" />
-      </el-form-item>
-            <el-form-item label="TCP端口">
-        <el-input v-model="form.tcp_port" type="number"/>
-      </el-form-item>
-            <el-form-item label="SSL端口">
-        <el-input v-model="form.ssl_port" type="number"/>
-      </el-form-item>
+    <div id="Design" style="margin-top:40px;">
+      <el-form ref="form" :model="form" label-width="300px">
+      <el-row>
+        <el-col :span="12" :offset="6" v-if="active == 1">
+          
+            <el-form-item label="代理币种">
+              <el-select v-model="form.coin" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
 
-      <el-form-item label="加密端口">
-        <el-input v-model="form.encrypt_port" type="number" />
-      </el-form-item>
+            <el-form-item label="服务名称（抽水矿工名全英文）">
+              <el-input v-model="form.name" value="ProxyFee" />
+            </el-form-item>
 
-      <el-form-item label="需要代理的矿池地址">
-        <el-input v-model="form.pool_address" />
-      </el-form-item>
+            <el-form-item label="代理矿池地址(格式tcp://IP:端口)">
+              <el-input v-model="form.pool_address" />
+            </el-form-item>
 
-      <el-form-item label="抽水模式">
-          <el-select type="number" v-model="form.share" placeholder="抽水模式">
-            <el-option label="不抽水" value="0" />
-            <el-option label="按百分比抽水" value="1" />
-            <el-option label="抽百分百(统一钱包)" value="2" />
-          </el-select>
-      </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="next">下一步</el-button>
+            </el-form-item>
 
-      <el-form-item label="抽水矿池">
-        <el-input v-model="form.share_address"/>
-      </el-form-item>
+        </el-col>
+        <el-col :span="12" :offset="6" v-if="active == 2"> 
+          
+            <el-form-item label="代理币种">
+              <el-select v-model="form.coin" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
 
-      <el-form-item label="抽水钱包">
-        <el-input v-model="form.share_wallet" />
-      </el-form-item>
+            <el-form-item label="服务名称（抽水矿工名全英文）">
+              <el-input v-model="form.name" value="ProxyFee" />
+            </el-form-item>
 
-      <el-form-item label="抽水比例%">
-        <el-input v-model="form.share_rate" type="number"/>
-      </el-form-item>
+            <el-form-item label="代理矿池地址(格式tcp://IP:端口)">
+              <el-input v-model="form.pool_address" />
+            </el-form-item>
 
-      <el-form-item label="加密协议key">
-        <el-input v-model="form.key" />
-      </el-form-item>
+            <el-form-item>
+              <el-button type="primary" @click="next">下一步</el-button>
+            </el-form-item>
 
-      <el-form-item label="加密协议向量偏移">
-        <el-input v-model="form.iv" />
-      </el-form-item>
+        </el-col>
+        <el-col :span="12" :offset="6" v-if="active == 3"> 
+            <el-form-item label="代理币种">
+              <el-select v-model="form.coin" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
 
-      <el-form-item>
-        <el-button type="primary" @click="onSubmit">Create</el-button>
-        <el-button @click="onCancel">Cancel</el-button>
-      </el-form-item>
-    </el-form>
+            <el-form-item label="服务名称（抽水矿工名全英文）">
+              <el-input v-model="form.name" value="ProxyFee" />
+            </el-form-item>
+
+            <el-form-item label="代理矿池地址(格式tcp://IP:端口)">
+              <el-input v-model="form.pool_address" />
+            </el-form-item>
+
+            <el-form-item>
+              <el-button type="primary" @click="next">下一步</el-button>
+            </el-form-item>  
+          
+        </el-col>
+        <el-col :span="12" :offset="6" v-if="active == 4"> 
+
+            <el-form-item label="代理币种">
+              <el-select v-model="form.coin" placeholder="请选择">
+                <el-option
+                  v-for="item in options"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value"
+                >
+                </el-option>
+              </el-select>
+            </el-form-item>
+
+            <el-form-item label="服务名称（抽水矿工名全英文）">
+              <el-input v-model="form.name" value="ProxyFee" />
+            </el-form-item>
+
+            <el-form-item label="代理矿池地址(格式tcp://IP:端口)">
+              <el-input v-model="form.pool_address" />
+            </el-form-item>
+
+            <el-form-item>
+              <el-button type="primary" @click="next">下一步</el-button>
+            </el-form-item>  
+          
+        </el-col>
+      </el-row>
+      
+      </el-form>
+      <div style="margin-top: 100px"></div>
+      <el-steps
+        :active="active"
+        align-center
+        finish-status="success"
+        process-status="wait"
+        class="m-b-10"
+      >
+        <el-step title="步骤 2"></el-step>
+        <el-step title="步骤 3"></el-step>
+        <el-step title="步骤 4"></el-step>
+        <el-step title="步骤 5"></el-step>
+      </el-steps>
+    </div>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
+      active: 1,
+      options: [
+        {
+          label: "ETH",
+          value: "ETH",
+        },
+        {
+          label: "ETC",
+          value: "ETC",
+        },
+        {
+          label: "CFX",
+          value: "CFX",
+        },
+      ],
       form: {
-        name: '',
-        tcp_port:0,
-        ssl_port:0,
-        encrypt_port:0,
-        pool_address:'',
-        share:0,
-        share_address:'',
-        share_rate:1,
-        share_wallet:'',
-        key : '',
-        iv:'',
-      }
-    }
+        name: "ProxyFee",
+        tcp_port: 0,
+        ssl_port: 0,
+        encrypt_port: 0,
+        pool_address: "",
+        share: 0,
+        share_address: "",
+        share_rate: 1,
+        share_wallet: "",
+        key: "",
+        iv: "",
+      },
+    };
   },
   methods: {
+    // 步骤条上一步
+    next() {
+      if (this.active++ > 2) this.active = 0;
+    },
+
     onSubmit() {
-      this.loading = true
-      this.$store.dispatch('user/create_proxy', this.form).then(() => {
+      this.loading = true;
+      this.$store
+        .dispatch("user/create_proxy", this.form)
+        .then(() => {
           //this.$router.push({ path: this.redirect || '/' })
-          this.loading = false
-        }).catch(() => {
-          this.loading = false
+          this.loading = false;
         })
+        .catch(() => {
+          this.loading = false;
+        });
       //let res = await crate_proxy(this.form)
-      this.$message('submit!')
+      this.$message("submit!");
     },
     onCancel() {
       this.$message({
-        message: 'cancel!',
-        type: 'warning'
-      })
-    }
-  }
-}
+        message: "cancel!",
+        type: "warning",
+      });
+    },
+  },
+};
 </script>
 
 <style scoped>
-.line{
+.line {
   text-align: center;
 }
 </style>
@@ -168,3 +265,60 @@ export default {
       // <el-form-item label="Activity form">
       //   <el-input v-model="form.desc" type="textarea" />
       // </el-form-item>
+
+
+
+
+      //  <el-form ref="form" :model="form" label-width="120px">
+      //   <el-form-item label="名称">
+      //     <el-input v-model="form.name" />
+      //   </el-form-item>
+      //   <el-form-item label="TCP端口">
+      //     <el-input v-model="form.tcp_port" type="number" />
+      //   </el-form-item>
+
+      //   <el-form-item label="SSL端口">
+      //     <el-input v-model="form.ssl_port" type="number" />
+      //   </el-form-item>
+
+      //   <el-form-item label="加密端口">
+      //     <el-input v-model="form.encrypt_port" type="number" />
+      //   </el-form-item>
+
+      //   <el-form-item label="需要代理的矿池地址">
+      //     <el-input v-model="form.pool_address" />
+      //   </el-form-item>
+
+      //   <el-form-item label="抽水模式">
+      //     <el-select type="number" v-model="form.share" placeholder="抽水模式">
+      //       <el-option label="不抽水" value="0" />
+      //       <el-option label="按百分比抽水" value="1" />
+      //       <el-option label="抽百分百(统一钱包)" value="2" />
+      //     </el-select>
+      //   </el-form-item>
+
+      //   <el-form-item label="抽水矿池">
+      //     <el-input v-model="form.share_address" />
+      //   </el-form-item>
+
+      //   <el-form-item label="抽水钱包">
+      //     <el-input v-model="form.share_wallet" />
+      //   </el-form-item>
+
+      //   <el-form-item label="抽水比例%">
+      //     <el-input v-model="form.share_rate" type="number" />
+      //   </el-form-item>
+
+      //   <el-form-item label="加密协议key">
+      //     <el-input v-model="form.key" />
+      //   </el-form-item>
+
+      //   <el-form-item label="加密协议向量偏移">
+      //     <el-input v-model="form.iv" />
+      //   </el-form-item>
+
+      //   <el-form-item>
+      //     <el-button type="primary" @click="onSubmit">Create</el-button>
+      //     <el-button @click="onCancel">Cancel</el-button>
+      //   </el-form-item>
+      // </el-form>
