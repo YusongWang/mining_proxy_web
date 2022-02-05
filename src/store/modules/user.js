@@ -69,15 +69,10 @@ const actions = {
   create_proxy({ commit }, data) {
     console.log("hit ");
     return new Promise((resolve, reject) => {
-      console.log(data)
+
       crate_proxy(data).then(response => {
         const { data } = response
 
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
-
-        console.log(data)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -90,11 +85,7 @@ const actions = {
       getServerList().then(response => {
         const { data } = response
 
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
 
-        console.log(data)
         resolve(data)
       }).catch(error => {
         reject(error)
@@ -107,11 +98,6 @@ const actions = {
       console.log(data)
       getServerInfo(data).then(response => {
         const { data } = response
-
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
-
         console.log(data)
         resolve(data)
       }).catch(error => {

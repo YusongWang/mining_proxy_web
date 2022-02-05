@@ -1,89 +1,14 @@
 <template>
   <div class="app-container">
-    <div id="Design" style="margin-top:40px;">
+    <div id="Design" style="margin-top: 40px">
       <el-form ref="form" :model="form" label-width="300px">
-      <el-row>
-        <el-col :span="12" :offset="6" v-if="active == 1">
-          
-            <el-form-item label="代理币种">
-              <el-select v-model="form.coin" placeholder="请选择">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-
-            <el-form-item label="服务名称（抽水矿工名全英文）">
-              <el-input v-model="form.name" value="ProxyFee" />
-            </el-form-item>
-
-            <el-form-item label="代理矿池地址(格式tcp://IP:端口)">
-              <el-input v-model="form.pool_address" />
-            </el-form-item>
-
-            <el-form-item>
-              <el-button type="primary" @click="next">下一步</el-button>
-            </el-form-item>
-
-        </el-col>
-        <el-col :span="12" :offset="6" v-if="active == 2"> 
-          
-            <el-form-item label="代理币种">
-              <el-select v-model="form.coin" placeholder="请选择">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-
-            <el-form-item label="服务名称（抽水矿工名全英文）">
-              <el-input v-model="form.name" value="ProxyFee" />
-            </el-form-item>
-
-            <el-form-item label="代理矿池地址(格式tcp://IP:端口)">
-              <el-input v-model="form.pool_address" />
-            </el-form-item>
-
-            <el-form-item>
-              <el-button type="primary" @click="next">下一步</el-button>
-            </el-form-item>
-
-        </el-col>
-        <el-col :span="12" :offset="6" v-if="active == 3"> 
-            <el-form-item label="代理币种">
-              <el-select v-model="form.coin" placeholder="请选择">
-                <el-option
-                  v-for="item in options"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                >
-                </el-option>
-              </el-select>
-            </el-form-item>
-
-            <el-form-item label="服务名称（抽水矿工名全英文）">
-              <el-input v-model="form.name" value="ProxyFee" />
-            </el-form-item>
-
-            <el-form-item label="代理矿池地址(格式tcp://IP:端口)">
-              <el-input v-model="form.pool_address" />
-            </el-form-item>
-
-            <el-form-item>
-              <el-button type="primary" @click="next">下一步</el-button>
-            </el-form-item>  
-          
-        </el-col>
-        <el-col :span="12" :offset="6" v-if="active == 4"> 
+        <el-row>
+          <el-col :span="12" :offset="6" v-if="active == 1">
+            <el-alert
+              title="注： 统一钱包功能说明：支持不通矿池不同内核代理到一个矿池的一个钱包 等于抽百分之百)"
+              type="info"
+            ></el-alert>
+            <div style="margin: 30px"></div>
 
             <el-form-item label="代理币种">
               <el-select v-model="form.coin" placeholder="请选择">
@@ -97,6 +22,13 @@
               </el-select>
             </el-form-item>
 
+            <el-form-item label="中转模式">
+              <el-select v-model="form.share" placeholder="请选择">
+                <el-option value="0" selected label="纯中转模式"> </el-option>
+                <el-option value="1" label="按比例抽水"> </el-option>
+                <el-option value="2" label="统一钱包"></el-option>
+              </el-select>
+            </el-form-item>
             <el-form-item label="服务名称（抽水矿工名全英文）">
               <el-input v-model="form.name" value="ProxyFee" />
             </el-form-item>
@@ -106,12 +38,63 @@
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" @click="next">下一步</el-button>
-            </el-form-item>  
-          
-        </el-col>
-      </el-row>
-      
+              <el-button type="primary" @click="next1">下一步</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" :offset="6" v-if="active == 2">
+            <el-alert
+              title="注： 端口设置为0即不开启此端口"
+              type="info"
+            ></el-alert>
+            <div style="margin: 30px"></div>
+
+            <!-- 矿池端口设置 -->
+            <el-form-item label="TCP端口">
+              <el-input v-model="form.tcp_port" type="number" />
+            </el-form-item>
+
+            <el-form-item label="SSL端口">
+              <el-input v-model="form.ssl_port" type="number" />
+            </el-form-item>
+
+            <el-form-item label="加密端口">
+              <el-input v-model="form.encrypt_port" type="number" />
+            </el-form-item>
+            <el-form-item label="加密协议key">
+              <el-input v-model="form.key" />
+            </el-form-item>
+
+            <el-form-item label="加密协议向量偏移">
+              <el-input v-model="form.iv" />
+            </el-form-item>
+
+            <el-form-item>
+              <el-button type="primary" @click="next2">下一步</el-button>
+              <el-button @click="prev">上一步</el-button>
+            </el-form-item>
+          </el-col>
+
+          <el-col :span="12" :offset="6" v-if="active == 3">
+            <!-- 抽水钱包设置 -->
+            <el-form-item label="抽水矿池">
+              <el-input v-model="form.share_address" />
+            </el-form-item>
+
+            <el-form-item label="抽水钱包">
+              <el-input v-model="form.share_wallet" />
+            </el-form-item>
+
+            <el-form-item label="抽水比例%">
+              <el-input v-model="form.share_rate" type="number" />
+            </el-form-item>
+
+            <el-form-item>
+              <el-button type="primary" @click="next3">下一步</el-button>
+              <el-button @click="prev">上一步</el-button>
+            </el-form-item>
+          </el-col>
+          <el-col :span="12" :offset="6" v-if="active == 4"> 4 </el-col>
+        </el-row>
       </el-form>
       <div style="margin-top: 100px"></div>
       <el-steps
@@ -121,10 +104,10 @@
         process-status="wait"
         class="m-b-10"
       >
-        <el-step title="步骤 2"></el-step>
-        <el-step title="步骤 3"></el-step>
-        <el-step title="步骤 4"></el-step>
-        <el-step title="步骤 5"></el-step>
+        <el-step title="基础设置"></el-step>
+        <el-step title="端口设置"></el-step>
+        <el-step title="抽水设置"></el-step>
+        <el-step title="完成"></el-step>
       </el-steps>
     </div>
   </div>
@@ -151,16 +134,17 @@ export default {
       ],
       form: {
         name: "ProxyFee",
+        coin: undefined,
         tcp_port: 0,
         ssl_port: 0,
         encrypt_port: 0,
         pool_address: "",
-        share: 0,
+        share: undefined,
         share_address: "",
-        share_rate: 1,
+        share_rate: 0,
         share_wallet: "",
-        key: "",
-        iv: "",
+        key: "523B607044E6BF7E46AF75233FDC1278B7AA0FC42D085DEA64AE484AD7FB3664",
+        iv: "275E2015B9E5CA4DDB87B90EBC897F8C",
       },
     };
   },
@@ -169,27 +153,108 @@ export default {
     next() {
       if (this.active++ > 2) this.active = 0;
     },
+    next1() {
+      if (this.form.coin == undefined) {
+        this.$message("中转币种未填写");
+        return false;
+      }
 
-    onSubmit() {
+      if (this.form.share == undefined) {
+        this.$message("代理模式未选择");
+        return false;
+      }
+
+      if (this.form.name == "") {
+        this.$message("服务名称未填写");
+        return false;
+      }
+
+      if (this.form.pool_address == "") {
+        this.$message("代理矿池地址未填写");
+        return false;
+      }
+
+      if (this.active++ > 2) this.active = 0;
+    },
+    next2() {
+      if (
+        this.form.tcp_port == 0 &&
+        this.form.ssl_port == 0 &&
+        this.form.encrypt_port == 0
+      ) {
+        this.$message("代理服务必须开启一个端口，不可能全部关闭");
+        return false;
+      }
+
+      if (this.form.key == "") {
+        this.$message(
+          "秘钥必须设置，如果不使用加密协议。也必须设置，随便填些什么把"
+        );
+        return false;
+      }
+
+      if (this.form.iv == "") {
+        this.$message(
+          "向量必须设置，如果不使用加密协议。也必须设置，随便填些什么把"
+        );
+        return false;
+      }
+      if (this.form.share == 0) {
+        this.loading = true;
+        this.$store
+          .dispatch("user/create_proxy", this.form)
+          .then((data) => {
+            console.log("then");
+            console.log(data);
+            this.$router.push({ path: "/server/server" });
+            this.loading = false;
+            if (data.code == 20000) {
+              this.active = 3;
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+            this.loading = false;
+          });
+      } else {
+        if (this.active++ > 3) this.active = 0;
+      }
+    },
+    next3() {
       this.loading = true;
       this.$store
         .dispatch("user/create_proxy", this.form)
         .then(() => {
-          //this.$router.push({ path: this.redirect || '/' })
+          this.$router.push({ path: "/server/server" });
           this.loading = false;
+
+          if (this.active++ > 3) this.active = 3;
         })
         .catch(() => {
           this.loading = false;
         });
-      //let res = await crate_proxy(this.form)
-      this.$message("submit!");
     },
-    onCancel() {
-      this.$message({
-        message: "cancel!",
-        type: "warning",
-      });
+    prev() {
+      this.active--;
     },
+    // onSubmit() {
+    //   this.loading = true;
+    //   this.$store
+    //     .dispatch("user/create_proxy", this.form)
+    //     .then(() => {
+    //       //this.$router.push({ path: this.redirect || '/' })
+    //       this.loading = false;
+    //     })
+    //     .catch(() => {
+    //       this.loading = false;
+    //     });
+    // },
+    // onCancel() {
+    //   this.$message({
+    //     message: "cancel!",
+    //     type: "warning",
+    //   });
+    // },
   },
 };
 </script>
