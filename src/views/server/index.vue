@@ -21,80 +21,54 @@
         <el-col :span="6">
           <div class="grid-content bg-purple">
             <el-card class="box-card">
-              <h3>在线矿工</h3>
-            </el-card>
-          </div>
-        </el-col>
-
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-card class="box-card">
-              <h3>总代理算力</h3>
-            </el-card>
-          </div>
-        </el-col>
-
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-card class="box-card">
-              <h3>服务个数</h3>
-            </el-card>
-          </div>
-        </el-col>
-
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-card class="box-card">
-              <h3>报告抽水算力(预估)</h3>
-            </el-card>
-          </div>
-        </el-col>
-      </el-row>
-
-      <el-row :gutter="40" style="margin-top: 50px">
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-card class="box-card">
-              <h3>总代理份额/接受份额/拒绝份额/接受百分比</h3>
-            </el-card>
-          </div>
-        </el-col>
-
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-card class="box-card">
-              <h3>总代理抽水份额/抽水百分比</h3>
-            </el-card>
-          </div>
-        </el-col>
-
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-card class="box-card">
-              <h3>抽水说明</h3>
-            </el-card>
-          </div>
-        </el-col>
-
-        <el-col :span="6">
-          <div class="grid-content bg-purple">
-            <el-card class="box-card">
-              <h3>更新日志</h3>
-              <div class="block">
-                <el-timeline>
-                  <el-timeline-item
-                    v-for="(activity, index) in activities"
-                    :key="index"
-                    :icon="activity.icon"
-                    :type="activity.type"
-                    :color="activity.color"
-                    :size="activity.size"
-                    :timestamp="activity.timestamp"
-                  >
-                    {{ activity.content }}
-                  </el-timeline-item>
-                </el-timeline>
+              <div slot="header" class="clearfix">
+                <span>在线矿工</span>
               </div>
+              <div class="text item">{{current_server.online}}</div>
+            </el-card>
+          </div>
+        </el-col>
+
+        <el-col :span="6">
+          <div class="grid-content bg-purple">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>总算力</span>
+              </div>
+              <div class="text item">{{current_server.total_hash}}</div>
+            </el-card>
+          </div>
+        </el-col>
+
+        <el-col :span="6">
+          <div class="grid-content bg-purple">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>抽水算力(预估)</span>
+              </div>
+              <div class="text item">{{current_server.fee_hash}}</div>
+            </el-card>
+          </div>
+        </el-col>
+
+        <el-col :span="6">
+          <div class="grid-content bg-purple">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>总份额/接受份额/拒绝份额/接受百分比</span>
+              </div>
+              <div class="text item">{{current_server.accept_index}}/{{current_server.share_index}}/{{current_server.reject_index}}/{{current_server.rate}}%</div>
+            </el-card>
+          </div>
+        </el-col>
+
+        <el-col :span="6">
+          <div class="grid-content bg-purple">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>总代理抽水份额/抽水百分比</span>
+              </div>
+              <div class="text item">{{current_server.fee_share_index}}/{{current_server.share_rate}}%</div>
             </el-card>
           </div>
         </el-col>
