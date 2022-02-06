@@ -55,7 +55,6 @@
           </div>
         </el-col>
 
-
         <el-col :span="6">
           <div class="grid-content bg-purple">
             <el-card class="box-card">
@@ -119,14 +118,14 @@
           </div>
         </el-col>
 
-          <el-col :span="6">
+        <el-col :span="6">
           <div class="grid-content bg-purple">
             <el-card class="box-card">
               <div slot="header" class="clearfix">
                 <span>池</span>
               </div>
               <div class="text item">
-                <div>{{current_server.config.pool_address[0]}}</div>
+                <div>{{ current_server.config.pool_address[0] }}</div>
               </div>
             </el-card>
           </div>
@@ -148,17 +147,17 @@
             {{ scope.row.worker_wallet }}
           </template>
         </el-table-column>
-        <el-table-column label="矿工名">
+        <el-table-column label="矿工名" align="center" width="400">
           <template slot-scope="scope">
             {{ scope.row.worker_name }}
           </template>
         </el-table-column>
-        <el-table-column label="报告算力" width="110" align="center">
+        <el-table-column label="报告算力" width="160" align="center">
           <template slot-scope="scope">
             <span>{{ scope.row.hash }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="总工作份额" width="110" align="center">
+        <el-table-column label="总工作份额" width="160" align="center">
           <template slot-scope="scope">
             {{ scope.row.share_index }}
           </template>
@@ -166,7 +165,7 @@
         <el-table-column
           class-name="status-col"
           label="接受份额"
-          width="110"
+          width="160"
           align="center"
         >
           <template slot-scope="scope">
@@ -178,11 +177,22 @@
           align="center"
           prop="created_at"
           label="拒绝份额"
-          width="200"
+          width="160"
         >
           <template slot-scope="scope">
             <i class="el-icon-time" />
             <span>{{ scope.row.invalid_index }}</span>
+          </template>
+        </el-table-column>
+
+        <el-table-column
+          align="center"
+          prop="created_at"
+          label="抽水份额"
+          width="160"
+        >
+          <template slot-scope="scope">
+            <span>{{ scope.row.fee_accept_index }}</span>
           </template>
         </el-table-column>
       </el-table>
@@ -197,6 +207,7 @@ export default {
     return {
       activeIndex: "1",
       list: [],
+      select_server_name: "",
       listLoading: false,
       current_server: {
         config: {},
@@ -205,13 +216,13 @@ export default {
     };
   },
   created() {
-    console.log("init");
     this.loading = true;
     this.$store
       .dispatch("user/server_list")
       .then((data) => {
         this.loading = false;
         this.list = data;
+        this.select_server_name = data[0];
         this.handleSelect(data[0], "");
         this.activeIndex = data[0];
       })
@@ -219,12 +230,18 @@ export default {
         console.log(e);
         this.loading = false;
       });
+
+    setInterval(() => {
+      this.$store
+        .dispatch("user/server", this.select_server_name)
+        .then((data) => {
+          this.current_server = data;
+        })
+        .catch(() => {});
+    }, 1000 * 30);
   },
   methods: {
     handleSelect(key, keyPath) {
-      //console.log(key, keyPath);
-      // let a = await getServerInfo(key);
-      // console.log(a);
       this.loading = true;
       this.$store
         .dispatch("user/server", key)
@@ -232,6 +249,7 @@ export default {
           //this.$router.push({ path: this.redirect || '/' })
           this.loading = false;
           this.current_server = data;
+          this.select_server_name = key;
         })
         .catch(() => {
           this.loading = false;
