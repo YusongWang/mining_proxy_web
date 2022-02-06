@@ -1,138 +1,155 @@
-import { login, logout, getInfo,crate_proxy} from '@/api/user'
-import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter } from '@/router'
-import { getServerInfo,getServerList } from "@/api/server";
-
+import { login, logout, getInfo, crate_proxy,getDashBorad} from "@/api/user";
+import { getToken, setToken, removeToken } from "@/utils/auth";
+import { resetRouter } from "@/router";
+import { getServerInfo, getServerList } from "@/api/server";
 
 const getDefaultState = () => {
   return {
     token: getToken(),
-    name: '',
-    avatar: ''
-  }
-}
+    name: "",
+    avatar: "",
+  };
+};
 
-const state = getDefaultState()
+const state = getDefaultState();
 
 const mutations = {
   RESET_STATE: (state) => {
-    Object.assign(state, getDefaultState())
+    Object.assign(state, getDefaultState());
   },
   SET_TOKEN: (state, token) => {
-    state.token = token
+    state.token = token;
   },
   SET_NAME: (state, name) => {
-    state.name = name
+    state.name = name;
   },
   SET_AVATAR: (state, avatar) => {
-    state.avatar = avatar
-  }
-}
+    state.avatar = avatar;
+  },
+};
 
 const actions = {
   // user login
   login({ commit }, userInfo) {
-    const { username, password } = userInfo
+    const { username, password } = userInfo;
     return new Promise((resolve, reject) => {
-      login({ password: password }).then(response => {
-        const { data } = response
-        commit('SET_TOKEN', data.token)
-        setToken(data.token)
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+      login({ password: password })
+        .then((response) => {
+          const { data } = response;
+          commit("SET_TOKEN", data.token);
+          setToken(data.token);
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   },
-
   // get user info
   getInfo({ commit, state }) {
     return new Promise((resolve, reject) => {
-      getInfo(state.token).then(response => {
-        const { data } = response
+      getInfo(state.token)
+        .then((response) => {
+          const { data } = response;
 
-        if (!data) {
-          return reject('Verification failed, please Login again.')
-        }
+          if (!data) {
+            return reject("Verification failed, please Login again.");
+          }
 
-        const { name, avatar } = data
+          const { name, avatar } = data;
 
-        commit('SET_NAME', name)
-        commit('SET_AVATAR', avatar)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+          commit("SET_NAME", name);
+          commit("SET_AVATAR", avatar);
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   },
   // get user info
   create_proxy({ commit }, data) {
     console.log("hit ");
     return new Promise((resolve, reject) => {
+      crate_proxy(data)
+        .then((response) => {
+          const { data } = response;
 
-      crate_proxy(data).then(response => {
-        const { data } = response
-
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   },
-  server_list({commit}) {
+  server_list({ commit }) {
     console.log("hit ");
     return new Promise((resolve, reject) => {
-      getServerList().then(response => {
-        const { data } = response
+      getServerList()
+        .then((response) => {
+          const { data } = response;
 
-
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   },
-  server({commit},data) {
+  server({ commit }, data) {
     console.log("hit ");
     return new Promise((resolve, reject) => {
-      console.log(data)
-      getServerInfo(data).then(response => {
-        const { data } = response
-        console.log(data)
-        resolve(data)
-      }).catch(error => {
-        reject(error)
-      })
-    })
+      getServerInfo(data)
+        .then((response) => {
+          const { data } = response;
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   },
   // user logout
   logout({ commit, state }) {
     return new Promise((resolve, reject) => {
-      logout(state.token).then(() => {
-        removeToken() // must remove  token  first
-        resetRouter()
-        commit('RESET_STATE')
-        resolve()
-      }).catch(error => {
-        reject(error)
-      })
-    })
+      logout(state.token)
+        .then(() => {
+          removeToken(); // must remove  token  first
+          resetRouter();
+          commit("RESET_STATE");
+          resolve();
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
   },
-
+  // user logout
+  dashboard({ commit }) {
+    return new Promise((resolve, reject) => {
+      getDashBorad()
+        .then((response) => {
+          const { data } = response;
+          resolve(data);
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  },
   // remove token
   resetToken({ commit }) {
-    return new Promise(resolve => {
-      removeToken() // must remove  token  first
-      commit('RESET_STATE')
-      resolve()
-    })
-  }
-}
+    return new Promise((resolve) => {
+      removeToken(); // must remove  token  first
+      commit("RESET_STATE");
+      resolve();
+    });
+  },
+};
 
 export default {
   namespaced: true,
   state,
   mutations,
-  actions
-}
-
+  actions,
+};

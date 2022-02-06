@@ -1,13 +1,31 @@
 <template>
   <div class="dashboard-container">
+    <el-alert
+      title="欢迎报告Bug及文字错误。你每报告一个Bug。软件就离你心目中最好的软件又走近了一步！！！ "
+      type="info"
+    >
+    </el-alert>
+
+    <div style="margin-top:30px;"></div>
     <el-row :gutter="40">
+      <el-col :span="3">
+        <div class="grid-content bg-purple">
+          <el-card class="box-card">
+            <div slot="header" class="clearfix">
+              <span>矿池开启数量</span>
+            </div>
+            <div class="text item">{{ overview.proxy_num }}</div>
+          </el-card>
+        </div>
+      </el-col>
+
       <el-col :span="3">
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
               <span>在线矿工</span>
             </div>
-            <div class="text item">123123123</div>
+            <div class="text item">{{ overview.online }}</div>
           </el-card>
         </div>
       </el-col>
@@ -18,18 +36,7 @@
             <div slot="header" class="clearfix">
               <span>中转算力</span>
             </div>
-            <div class="text item">123123123</div>
-          </el-card>
-        </div>
-      </el-col>
-
-      <el-col :span="3">
-        <div class="grid-content bg-purple">
-          <el-card class="box-card">
-            <div slot="header" class="clearfix">
-              <span>矿池开启数量</span>
-            </div>
-            <div class="text item">123123123</div>
+            <div class="text item">{{ overview.total_hash }}</div>
           </el-card>
         </div>
       </el-col>
@@ -40,7 +47,7 @@
             <div slot="header" class="clearfix">
               <span>抽水算力</span>
             </div>
-            <div class="text item">123123123</div>
+            <div class="text item">{{ overview.fee_hash }}</div>
           </el-card>
         </div>
       </el-col>
@@ -51,7 +58,7 @@
             <div slot="header" class="clearfix">
               <span>接受百分比</span>
             </div>
-            <div class="text item">123123123</div>
+            <div class="text item">{{ overview.rate }}%</div>
           </el-card>
         </div>
       </el-col>
@@ -62,7 +69,7 @@
             <div slot="header" class="clearfix">
               <span>抽水百分比</span>
             </div>
-            <div class="text item">123123123</div>
+            <div class="text item">{{ overview.share_rate }}%</div>
           </el-card>
         </div>
       </el-col>
@@ -71,9 +78,9 @@
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>开发者百分比</span>
+              <span>运行时间</span>
             </div>
-            <div class="text item">123123123</div>
+            <div class="text item">{{ overview.online_time }}</div>
           </el-card>
         </div>
       </el-col>
@@ -84,7 +91,7 @@
             <div slot="header" class="clearfix">
               <span>版本号</span>
             </div>
-            <div class="text item">123123123</div>
+            <div class="text item">{{ overview.version }}</div>
           </el-card>
         </div>
       </el-col>
@@ -100,17 +107,34 @@
             <div class="text item">
               <p>1、纯转发不抽水</p>
               <p>
-                2、如何查看我当前给开发者抽水了多少M算力? 点击开发者
-                <el-link
+                2、如何查看我当前给开发者抽水了多少M算力? 点击以下链接进入开发者钱包
+                <ul>
+
+                  <li>               <el-link
                   type="primary"
                   href="https://www.ethermine.org/miners/3602b50d3086edefcd9318bcceb6389004fb14ee/dashboard"
                   target="_blank"
-                  >开发者矿池钱包</el-link
-                >
+                  >ETH</el-link
+                ></li>
+
+                <li>                <el-link
+                  type="primary"
+                  href="https://www.ethermine.org/miners/3602b50d3086edefcd9318bcceb6389004fb14ee/dashboard"
+                  target="_blank"
+                  >ETC</el-link
+                ></li>
+
+                <li>                <el-link
+                  type="primary"
+                  href="https://www.ethermine.org/miners/3602b50d3086edefcd9318bcceb6389004fb14ee/dashboard"
+                  target="_blank"
+                  >CFX</el-link
+                ></li>
+                </ul>
                 进入之后进入旷工列表。按ctrl+f 输入你的代理服务器机器名称.
                 你的名称为:
               </p>
-              <p>{{ name }}</p>
+              <p style="color: red">{{ overview.develop_worker_name }}</p>
               <p>
                 即可看到开发者抽了多少M，绝对无暗抽。如果遇到抽水比例不正常的。一般是机器名称和其他人重复了。如果纠结开发者抽水多少可以换个唯一的机器名称。
               </p>
@@ -121,24 +145,29 @@
               </p>
 
               <h5>交流群：</h5>
-              <el-link
-                type="primary"
-                href="https://github.com/dothinkdone/mining_proxy"
-                target="_blank"
-                >github</el-link
-              >
-              </br>
-              <el-link
-                type="primary"
-                href="https://t.me/+ZkUDlH2Fecc3MGM1"
-                target="_blank"
-                >TG 小飞机群组</el-link
-              ></br>
-              <p>QQ群: 724855814</p>
-              <el-lini>开发者微信: newweilai</el-lini>
-              <p>
-                欢迎报告Bug及文字错误。你每报告一个Bug。软件就离你心目中最好的软件又走近了一步！！！
-              </p>
+
+              <ul>
+                <li>
+                  <el-link
+                    type="primary"
+                    href="https://github.com/dothinkdone/mining_proxy"
+                    target="_blank"
+                    >github</el-link
+                  >
+                </li>
+                <li>
+                  <el-link
+                    type="primary"
+                    href="https://t.me/+ZkUDlH2Fecc3MGM1"
+                    target="_blank"
+                    >TG 小飞机群组</el-link
+                  >
+                </li>
+
+                <li>QQ群: 724855814</li>
+
+                <li>开发者微信: newweilai</li>
+              </ul>
             </div>
           </el-card>
         </div>
@@ -181,7 +210,7 @@ export default {
   name: "Dashboard",
   data() {
     return {
-      name: "Dashboard",
+      overview: {},
       activities: [
         {
           content: "支持使用图标",
@@ -207,6 +236,19 @@ export default {
       ],
     };
   },
+  created() {
+    console.log("created");
+    this.loading = true;
+    this.$store
+      .dispatch("user/dashboard")
+      .then((data) => {
+        this.loading = false;
+        this.overview = data;
+      })
+      .catch(() => {
+        this.loading = false;
+      });
+  },
   computed: {
     ...mapGetters(["name"]),
   },
@@ -224,3 +266,21 @@ export default {
   }
 }
 </style>
+
+
+
+// accept_index: 0
+// config: {name: "proxy", log_level: 6, log_path: "", ssl_port: 8443, tcp_port: 14444, encrypt_port: 14444,…}
+// develop_worker_name: "develop_YusongdeMac-mini.local"
+// fee_accept_index: 0
+// fee_hash: "0 B"
+// fee_reject_index: 0
+// fee_share_index: 0
+// online: 0
+// proxy_num: 0
+// rate: 0
+// reject_index: 0
+// share_index: 0
+// share_rate: 0
+// total_hash: "0 B"
+// version: "0.2.2"

@@ -16,6 +16,13 @@ export function getInfo(token) {
   })
 }
 
+export function getDashBorad() {
+  return request({
+    url: '/user/dashboard',
+    method: 'post'
+  })
+}
+
 export function logout() {
   return request({
     url: '/user/logout',

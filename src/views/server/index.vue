@@ -24,7 +24,7 @@
               <div slot="header" class="clearfix">
                 <span>在线矿工</span>
               </div>
-              <div class="text item">{{current_server.online}}</div>
+              <div class="text item">{{ current_server.online }}</div>
             </el-card>
           </div>
         </el-col>
@@ -35,18 +35,56 @@
               <div slot="header" class="clearfix">
                 <span>总算力</span>
               </div>
-              <div class="text item">{{current_server.total_hash}}</div>
+              <div class="text item">{{ current_server.total_hash }}</div>
             </el-card>
           </div>
         </el-col>
 
+        <el-col :span="6">
+          <div class="grid-content bg-purple">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>总/接受/拒绝/百分比</span>
+              </div>
+              <div class="text item">
+                {{ current_server.accept_index }}/{{
+                  current_server.share_index
+                }}/{{ current_server.reject_index }}/{{ current_server.rate }}%
+              </div>
+            </el-card>
+          </div>
+        </el-col>
+
+
+        <el-col :span="6">
+          <div class="grid-content bg-purple">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>抽水份额/百分比</span>
+              </div>
+              <div class="text item">
+                {{ current_server.fee_share_index }}/{{
+                  current_server.share_rate
+                }}%
+              </div>
+            </el-card>
+          </div>
+        </el-col>
+      </el-row>
+      <div style="margin-top: 30px"></div>
+
+      <el-row :gutter="40">
         <el-col :span="6">
           <div class="grid-content bg-purple">
             <el-card class="box-card">
               <div slot="header" class="clearfix">
                 <span>抽水算力(预估)</span>
               </div>
-              <div class="text item">{{current_server.fee_hash}}</div>
+              <div class="text item">
+                {{ current_server.fee_hash }}/{{
+                  current_server.config.share_rate * 100
+                }}%
+              </div>
             </el-card>
           </div>
         </el-col>
@@ -55,9 +93,13 @@
           <div class="grid-content bg-purple">
             <el-card class="box-card">
               <div slot="header" class="clearfix">
-                <span>总份额/接受份额/拒绝份额/接受百分比</span>
+                <span>端口TCP/SSL/加密</span>
               </div>
-              <div class="text item">{{current_server.accept_index}}/{{current_server.share_index}}/{{current_server.reject_index}}/{{current_server.rate}}%</div>
+              <div class="text item">
+                {{ current_server.config.tcp_port }}/{{
+                  current_server.config.ssl_port
+                }}/{{ current_server.config.encrypt_port }}
+              </div>
             </el-card>
           </div>
         </el-col>
@@ -66,15 +108,33 @@
           <div class="grid-content bg-purple">
             <el-card class="box-card">
               <div slot="header" class="clearfix">
-                <span>总代理抽水份额/抽水百分比</span>
+                <span>运行模式</span>
               </div>
-              <div class="text item">{{current_server.fee_share_index}}/{{current_server.share_rate}}%</div>
+              <div class="text item">
+                <div v-if="current_server.config.share == 0">纯中转</div>
+                <div v-if="current_server.config.share == 1">按比例抽水</div>
+                <div v-if="current_server.config.share == 2">统一钱包</div>
+              </div>
+            </el-card>
+          </div>
+        </el-col>
+
+          <el-col :span="6">
+          <div class="grid-content bg-purple">
+            <el-card class="box-card">
+              <div slot="header" class="clearfix">
+                <span>池</span>
+              </div>
+              <div class="text item">
+                <div>{{current_server.config.pool_address[0]}}</div>
+              </div>
             </el-card>
           </div>
         </el-col>
       </el-row>
 
       <div style="margin-top: 30px"></div>
+
       <el-table
         v-loading="listLoading"
         :data="current_server.workers"
@@ -155,7 +215,8 @@ export default {
         this.handleSelect(data[0], "");
         this.activeIndex = data[0];
       })
-      .catch(() => {
+      .catch((e) => {
+        console.log(e);
         this.loading = false;
       });
   },
