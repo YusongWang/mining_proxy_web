@@ -19,7 +19,6 @@
           v-model="loginForm.password"
           :type="passwordType"
           placeholder="密码"
-          name="password"
           tabindex="2"
           auto-complete="on"
           @keyup.enter.native="handleLogin"
