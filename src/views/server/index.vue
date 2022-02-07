@@ -256,6 +256,8 @@
               </el-card>
             </div>
           </el-col>
+        </el-row>
+        <el-row :gutter="40">
           <div style="margin-top: 30px"></div>
           <el-col :span="6">
             <div class="grid-content bg-purple">
