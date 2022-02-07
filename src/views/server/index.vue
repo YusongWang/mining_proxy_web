@@ -183,7 +183,6 @@
             width="160"
           >
             <template slot-scope="scope">
-              <i class="el-icon-time" />
               <span>{{ scope.row.invalid_index }}</span>
             </template>
           </el-table-column>
@@ -196,6 +195,29 @@
           >
             <template slot-scope="scope">
               <span>{{ scope.row.fee_accept_index }}</span>
+            </template>
+          </el-table-column>
+          <el-table-column
+            align="center"
+            prop="created_at"
+            label="在线时长"
+            width="220"
+          >
+            <template slot-scope="scope">
+              <i class="el-icon-time" />
+              <span>{{ scope.row.online_time }}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            align="center"
+            prop="created_at"
+            label="最后一次份额提交时间"
+            width="220"
+          >
+            <template slot-scope="scope">
+              <i class="el-icon-time" />
+              <span>{{ scope.row.last_subwork_time }}</span>
             </template>
           </el-table-column>
         </el-table>
@@ -337,8 +359,31 @@
             width="160"
           >
             <template slot-scope="scope">
-              <i class="el-icon-time" />
               <span>{{ scope.row.invalid_index }}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            align="center"
+            prop="created_at"
+            label="在线时长"
+            width="220"
+          >
+            <template slot-scope="scope">
+              <i class="el-icon-time" />
+              <span>{{ scope.row.online_time }}</span>
+            </template>
+          </el-table-column>
+
+          <el-table-column
+            align="center"
+            prop="created_at"
+            label="最后一次份额提交时间"
+            width="220"
+          >
+            <template slot-scope="scope">
+              <i class="el-icon-time" />
+              <span>{{ scope.row.last_subwork_time }}</span>
             </template>
           </el-table-column>
         </el-table>
