@@ -75,6 +75,17 @@
           </el-col>
 
           <el-col :span="12" :offset="6" v-if="active == 3">
+            <el-form-item label="抽水算法">
+              <el-select v-model="form.share_alg" placeholder="请选择">
+                <el-option
+                  value="0"
+                  selected
+                  label="时间片算法(有小幅度曲线波动)"
+                >
+                </el-option>
+                <el-option value="99" label="随机算法(无曲线波动)"> </el-option>
+              </el-select>
+            </el-form-item>
             <!-- 抽水钱包设置 -->
             <el-form-item label="抽水矿池(格式tcp://IP:端口)">
               <el-input v-model="form.share_address" />
@@ -134,12 +145,13 @@ export default {
       ],
       form: {
         name: "MiningProxy",
-        coin: undefined,
+        coin: "",
+        share_alg: "",
         tcp_port: 0,
         ssl_port: 0,
         encrypt_port: 0,
         pool_address: "",
-        share: undefined,
+        share: "",
         share_address: "",
         share_rate: 0,
         share_wallet: "",

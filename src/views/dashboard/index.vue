@@ -1,10 +1,10 @@
 <template>
   <div class="dashboard-container">
-    <el-alert
+    <!-- <el-alert
       title="欢迎报告Bug及文字错误。你每报告一个Bug。软件就离你心目中最好的软件又走近了一步！！！ "
       type="info"
     >
-    </el-alert>
+    </el-alert> -->
 
     <div style="margin-top:30px;"></div>
     <el-row :gutter="40">
@@ -12,7 +12,7 @@
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>矿池开启数量</span>
+              <span>开启矿池</span>
             </div>
             <div class="text item">{{ overview.proxy_num }}</div>
           </el-card>
@@ -34,14 +34,14 @@
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>中转算力</span>
+              <span>总算力</span>
             </div>
             <div class="text item">{{ overview.total_hash }}</div>
           </el-card>
         </div>
       </el-col>
 
-      <el-col :span="3">
+      <!-- <el-col :span="3">
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
@@ -50,20 +50,20 @@
             <div class="text item">{{ overview.fee_hash }}</div>
           </el-card>
         </div>
-      </el-col>
+      </el-col> -->
 
       <el-col :span="3">
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>接受百分比</span>
+              <span>有效比</span>
             </div>
             <div class="text item">{{ overview.rate }}%</div>
           </el-card>
         </div>
       </el-col>
 
-      <el-col :span="3">
+      <!-- <el-col :span="3">
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
@@ -72,7 +72,7 @@
             <div class="text item">{{ overview.share_rate }}%</div>
           </el-card>
         </div>
-      </el-col>
+      </el-col> -->
 
       <el-col :span="3">
         <div class="grid-content bg-purple">
@@ -96,7 +96,7 @@
         </div>
       </el-col>
     </el-row>
-
+<!-- 
     <el-row :gutter="40" style="margin-top: 50px">
       <el-col :span="18">
         <div class="grid-content bg-purple">
@@ -198,7 +198,7 @@
             </div>
           </el-card>
         </div>
-      </el-col>
+      </el-col> -->
     </el-row>
   </div>
 </template>
