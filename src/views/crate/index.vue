@@ -23,10 +23,10 @@
             </el-form-item>
 
             <el-form-item label="中转模式">
-              <el-select v-model="form.share" placeholder="请选择">
-                <el-option value="0" selected label="纯中转模式"> </el-option>
-                <el-option value="1" label="按比例抽水"> </el-option>
-                <el-option value="2" label="统一钱包"></el-option>
+              <el-select v-model="form.share" :placeholder="$t('proxy.select')">
+                <el-option value="0" selected :label="$t('proxy.mode1')"> </el-option>
+                <el-option value="1" :label="$t('proxy.mode2')"> </el-option>
+                <el-option value="2" :label="$t('proxy.mode3')"></el-option>
               </el-select>
             </el-form-item>
             <el-form-item label="服务名称（抽水矿工名全英文）">

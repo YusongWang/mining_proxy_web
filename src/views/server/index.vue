@@ -23,7 +23,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>在线矿工</span>
+                  <span>{{ $t("dashboard.online_workers") }}</span>
                 </div>
                 <div class="text item">{{ current_server.online }}</div>
               </el-card>
@@ -34,7 +34,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>总算力</span>
+                  <span>{{ $t("dashboard.total_hashrate") }}</span>
                 </div>
                 <div class="text item">{{ current_server.total_hash }}</div>
               </el-card>
@@ -45,7 +45,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>总/接受/拒绝/百分比</span>
+                  <span>{{ $t("onlinepool.total_overview") }}</span>
                 </div>
                 <div class="text item">
                   {{ current_server.accept_index }}/{{
@@ -62,7 +62,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>抽水份额/百分比</span>
+                  <span>{{ $t("onlinepool.total_fee_share") }}</span>
                 </div>
                 <div class="text item">
                   {{ current_server.fee_share_index }}/{{
@@ -80,7 +80,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>抽水算力(预估)</span>
+                  <span>{{ $t("onlinepool.total_fee_hashrate") }}</span>
                 </div>
                 <div class="text item">
                   {{ current_server.fee_hash }}/{{
@@ -95,7 +95,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>端口TCP/SSL/加密</span>
+                  <span>{{ $t("onlinepool.port") }}</span>
                 </div>
                 <div class="text item">
                   {{ current_server.config.tcp_port }}/{{
@@ -110,12 +110,12 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>运行模式</span>
+                  <span>{{ $t("onlinepool.mode") }}</span>
                 </div>
                 <div class="text item">
-                  <div v-if="current_server.config.share == 0">纯中转</div>
-                  <div v-if="current_server.config.share == 1">按比例抽水</div>
-                  <div v-if="current_server.config.share == 2">统一钱包</div>
+                  <div v-if="current_server.config.share == 0">{{$t('proxy.mode1')}}</div>
+                  <div v-if="current_server.config.share == 1">{{$t('proxy.mode2')}}</div>
+                  <div v-if="current_server.config.share == 2">{{$t('proxy.mode3')}}</div>
                 </div>
               </el-card>
             </div>
@@ -125,7 +125,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>池</span>
+                  <span>{{ $t("onlinepool.pool") }}</span>
                 </div>
                 <div class="text item">
                   <div>{{ current_server.config.pool_address[0] }}</div>
@@ -145,29 +145,29 @@
           fit
           highlight-current-row
         >
-          <el-table-column align="center" label="钱包">
+          <el-table-column align="center" :label="$t('onlinepool.wallet')">
             <template slot-scope="scope">
               {{ scope.row.worker_wallet }}
             </template>
           </el-table-column>
-          <el-table-column label="矿工名" align="center" width="400">
+          <el-table-column :label="$t('onlinepool.workername')" align="center" width="400">
             <template slot-scope="scope">
               {{ scope.row.worker_name }}
             </template>
           </el-table-column>
-          <el-table-column label="报告算力" width="160" align="center">
+          <el-table-column :label="$t('onlinepool.report_hashrate')" width="160" align="center">
             <template slot-scope="scope">
               <span>{{ scope.row.hash }}</span>
             </template>
           </el-table-column>
-          <el-table-column label="总工作份额" width="160" align="center">
+          <el-table-column :label="$t('onlinepool.total_share')" width="160" align="center">
             <template slot-scope="scope">
               {{ scope.row.share_index }}
             </template>
           </el-table-column>
           <el-table-column
             class-name="status-col"
-            label="接受份额"
+            :label="$t('onlinepool.total_accept')"
             width="160"
             align="center"
           >
@@ -179,7 +179,7 @@
           <el-table-column
             align="center"
             prop="created_at"
-            label="拒绝份额"
+            :label="$t('onlinepool.total_reject')"
             width="160"
           >
             <template slot-scope="scope">
@@ -190,7 +190,7 @@
           <el-table-column
             align="center"
             prop="created_at"
-            label="抽水份额"
+            :label="$t('onlinepool.fee_accept')"
             width="160"
           >
             <template slot-scope="scope">
@@ -200,7 +200,7 @@
           <el-table-column
             align="center"
             prop="created_at"
-            label="在线时长"
+            :label="$t('onlinepool.online_time')"
             width="220"
           >
             <template slot-scope="scope">
@@ -212,7 +212,7 @@
           <el-table-column
             align="center"
             prop="created_at"
-            label="最后一次份额提交时间"
+            :label="$t('onlinepool.last_share_time')"
             width="220"
           >
             <template slot-scope="scope">
@@ -288,9 +288,9 @@
                   <span>运行模式</span>
                 </div>
                 <div class="text item">
-                  <div v-if="current_server.config.share == 0">纯中转</div>
-                  <div v-if="current_server.config.share == 1">按比例抽水</div>
-                  <div v-if="current_server.config.share == 2">统一钱包</div>
+                  <div v-if="current_server.config.share == 0">{{$t('proxy.mode1')}}</div>
+                  <div v-if="current_server.config.share == 1">{{$t('proxy.mode2')}}</div>
+                  <div v-if="current_server.config.share == 2">{{$t('proxy.mode3')}}</div>
                 </div>
               </el-card>
             </div>

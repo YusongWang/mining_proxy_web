@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import VueI18n from "vue-i18n";
 Vue.use(Router)
+
+import i18n from '@/local/local'
+
 
 /* Layout */
 import Layout from '@/layout'
@@ -51,7 +54,7 @@ export const constantRoutes = [
       path: 'dashboard',
       name: 'Dashboard',
       component: () => import('@/views/dashboard/index'),
-      meta: { title: '仪表盘', icon: 'dashboard' }
+      meta: { title: i18n.t('menu.dashborad'), icon: 'dashboard' }
     }]
   },
   {
@@ -62,7 +65,7 @@ export const constantRoutes = [
       path: 'crate',
       name: 'Crate',
       component: () => import('@/views/crate/index'),
-      meta: { title: '创建代理', icon: 'eye' }
+      meta: { title: i18n.t('menu.crate_proxy'), icon: 'eye' }
     }]
   },
   {
@@ -73,7 +76,7 @@ export const constantRoutes = [
       path: 'server',
       name: 'Server',
       component: () => import('@/views/server/index'),
-      meta: { title: '在线矿池', icon: 'tree' }
+      meta: { title: i18n.t('menu.online_proxy'), icon: 'tree' }
     }]
   },
   // 404 page must be placed at the end !!!

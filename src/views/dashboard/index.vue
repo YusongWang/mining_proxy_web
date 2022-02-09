@@ -8,7 +8,7 @@
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>开启矿池</span>
+              <span>{{ $t("dashboard.open_pool") }}</span>
             </div>
             <div class="text item">{{ overview.proxy_num }}</div>
           </el-card>
@@ -19,7 +19,7 @@
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>在线矿工</span>
+              <span><span>{{ $t("dashboard.online_workers") }}</span></span>
             </div>
             <div class="text item">{{ overview.online }}</div>
           </el-card>
@@ -30,7 +30,7 @@
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>总算力</span>
+              <span>{{ $t("dashboard.total_hashrate") }}</span>
             </div>
             <div class="text item">{{ overview.total_hash }}</div>
           </el-card>
@@ -41,7 +41,7 @@
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>有效比</span>
+              <span>{{ $t("dashboard.share_rate") }}</span>
             </div>
             <div class="text item">{{ overview.rate }}%</div>
           </el-card>
@@ -53,7 +53,7 @@
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>运行时间</span>
+              <span>{{ $t("dashboard.start_time") }}</span>
             </div>
             <div class="text item">{{ overview.online_time }}</div>
           </el-card>
@@ -64,7 +64,7 @@
         <div class="grid-content bg-purple">
           <el-card class="box-card">
             <div slot="header" class="clearfix">
-              <span>版本号</span>
+              <span>{{ $t("dashboard.version") }}</span>
             </div>
             <div class="text item">{{ overview.version }}</div>
           </el-card>

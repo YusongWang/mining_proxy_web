@@ -6,7 +6,7 @@
         <div>
           <img src="@/assets/logo_cover.png" alt="logo" width="100%">
         </div>
-        <h3 class="title" style="margin-top:20px;">系统登录</h3>
+        <h3 class="title" style="margin-top:20px;">{{ $t("system.login") }}</h3>
       </div>
 
       <el-form-item prop="password">
@@ -18,7 +18,7 @@
           ref="password"
           v-model="loginForm.password"
           :type="passwordType"
-          placeholder="密码"
+          :placeholder="$t('system.password')"
           tabindex="2"
           auto-complete="on"
           @keyup.enter.native="handleLogin"
@@ -28,7 +28,7 @@
         </span>
       </el-form-item>
 
-      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">登录</el-button>
+      <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">{{ $t("system.login") }}</el-button>
 
     </el-form>
   </div>
@@ -42,7 +42,8 @@ export default {
   data() {
     const validatePassword = (rule, value, callback) => {
       if (value.length < 6) {
-        callback(new Error('密码不能小于6位数'))
+        //this.$i18n.locale = "cn"
+        callback(new Error(this.$i18n.t("system.passworderror")))
       } else {
         callback()
       }
