@@ -35,7 +35,11 @@ export function crate_proxy(data) {
   data.tcp_port = parseInt(data.tcp_port)
   data.encrypt_port = parseInt(data.encrypt_port)
   data.share = parseInt(data.share)
-  data.share_alg = parseInt(data.share_alg)
+  if (data.share_alg == "") {
+    data.share_alg = 99;
+  } else {
+    data.share_alg = parseInt(data.share_alg)
+  }
   data.share_rate = parseFloat(data.share_rate)
 
   return request({
