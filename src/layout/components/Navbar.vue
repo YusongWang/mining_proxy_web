@@ -11,10 +11,16 @@
     <div class="right-menu">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img src="@/assets/logo.png" width="100" style="margin-top:5px;"/>
+          <img src="@/assets/logo.png" width="100" style="margin-top: 5px" />
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">
+          <el-dropdown-item divided @click.native="cn">
+            <span style="display: block">中文</span>
+          </el-dropdown-item>
+          <el-dropdown-item divided @click.native="en">
+            <span style="display: block">English</span>
+          </el-dropdown-item>
           <el-dropdown-item divided @click.native="logout">
             <span style="display: block">{{ $t("system.logout") }}</span>
           </el-dropdown-item>
@@ -44,6 +50,12 @@ export default {
     async logout() {
       await this.$store.dispatch("user/logout");
       this.$router.push(`/login?redirect=${this.$route.fullPath}`);
+    },
+    cn() {
+      this.$i18n.locale = 'cn'
+    },
+    en() {
+      this.$i18n.locale = 'en'
     },
   },
 };

@@ -145,7 +145,7 @@ const messages = {
 
 // 通过选项创建 VueI18n 实例
 const i18n = new VueI18n({
-  locale: "en", // 设置地区
+  locale: "cn", // 设置地区
   messages, // 设置地区信息
 });
 
