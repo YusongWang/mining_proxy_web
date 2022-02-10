@@ -1,110 +1,152 @@
-
-import Vue from 'vue'
+import Vue from "vue";
 import VueI18n from "vue-i18n";
-Vue.use(VueI18n)
+Vue.use(VueI18n);
 
 const messages = {
-    en: {
-      menu: {
-        dashborad: "Dashborad",
-        crate_proxy: "Crate Proxy",
-        online_proxy: "Online Proxy Services",
-      },
-      system: {
-        login: "Login",
-        passworderror: "Password length must not be less than 6 bits",
-        logout: "logout",
-        password: "password",
-      },
-      dashboard: {
-        open_pool: "Open Pools",
-        online_workers: "Online Workers",
-        total_hashrate: "Total Hashrate",
-        share_rate: "Share Rate",
-        start_time: "Runtime",
-        version: "Version",
-      },
-      onlinepool: {
-        total_overview: "Total Share/Total Accept/Total Reject/Total Rate",
-        total_fee_share: "Fee Accept/Total Fee Rate",
-        total_fee_hashrate: "Fee Hash(estimate)",
-        port: "PROT - TCP/SSL/ENCRYPT",
-        mode: "Run Mode",
-        pool: "Pool",
-        wallet: "Wallet",
-        workername: "Worker",
-        report_hashrate: "Report HashRate",
-        total_share: "Total ",
-        total_accept: "Total Share",
-        total_reject: "Total Accept",
-        fee_accept: "Total Reject",
-        online_time: "Online Time",
-        last_share_time: "Last Share Time",
-      },
-      proxy: {
-        select: "Select",
-        mode1: "Directly",
-        mode2: "Prorate Dividends",
-        mode3: "Take all",
-      },
-      message: {
-        hello: "hello world",
-      },
+  en: {
+    menu: {
+      dashborad: "Dashborad",
+      crate_proxy: "Crate Proxy",
+      online_proxy: "Online Proxy Services",
     },
-    cn: {
-      menu: {
-        dashborad: "仪表盘",
-        crate_proxy: "创建代理",
-        online_proxy: "在线矿池",
-      },
-      system: {
-        login: "系统登录",
-        passworderror: "密码不能小于6位数",
-        logout: "退出登录",
-        password: "密码",
-      },
-      dashboard: {
-        open_pool: "开启矿池",
-        online_workers: "在线矿工",
-        total_hashrate: "总算力",
-        share_rate: "有效比",
-        start_time: "运行时间",
-        version: "版本号",
-      },
-      onlinepool: {
-        total_overview: "总/接受/拒绝/百分比",
-        total_fee_share: "抽水份额/百分比",
-        total_fee_hashrate: "抽水算力(预估)",
-        port: "端口TCP/SSL/加密",
-        mode: "运行模式",
-        pool: "池",
-        wallet: "钱包",
-        workername: "矿工名",
-        report_hashrate: "报告算力",
-        total_share: "总工作份额",
-        total_accept: "接受份额",
-        total_reject: "拒绝份额",
-        fee_accept: "抽水份额",
-        online_time: "在线时间",
-        last_share_time: "最后一次提交时间",
-      },
-      proxy: {
-        select: "请选择",
-        mode1: "纯中转",
-        mode2: "按比例抽水",
-        mode3: "统一钱包",
-      },
-      message: {
-        hello: "こんにちは、世界",
-      },
+    system: {
+      login: "Login",
+      passworderror: "Password length must not be less than 6 bits",
+      logout: "logout",
+      password: "password",
     },
-  };
-  
-  // 通过选项创建 VueI18n 实例
-  const i18n = new VueI18n({
-    locale: "en", // 设置地区
-    messages, // 设置地区信息
-  });
+    dashboard: {
+      open_pool: "Open Pools",
+      online_workers: "Online Workers",
+      total_hashrate: "Total Hashrate",
+      share_rate: "Share Rate",
+      start_time: "Runtime",
+      version: "Version",
+    },
+    onlinepool: {
+      total_overview: "Total Share/Total Accept/Total Reject/Total Rate",
+      total_fee_share: "Fee Accept/Total Fee Rate",
+      total_fee_hashrate: "Fee Hash(estimate)",
+      port: "PROT - TCP/SSL/ENCRYPT",
+      mode: "Run Mode",
+      pool: "Pool",
+      wallet: "Wallet",
+      workername: "Worker",
+      report_hashrate: "Report HashRate",
+      total_share: "Total ",
+      total_accept: "Total Share",
+      total_reject: "Total Accept",
+      fee_accept: "Total Reject",
+      online_time: "Online Time",
+      last_share_time: "Last Share Time",
+    },
+    proxy: {
+      select: "Select",
+      mode1: "Directly",
+      mode2: "Prorate Dividends",
+      mode3: "Take all",
+      coin: "Coin",
+      mode: "Proxy Mode",
+      server_name: "Service Name",
+      port_pool: "Proxy Pool (tcp://ip:port)",
+      tcp: "TCP Port",
+      ssl: "SSL Port",
+      encrypt: "Ecnrypt Port (AES)",
+      encrypt_key: "Encrypt Key for Encrypt Port",
+      encrypt_iv: "Encrypt Iv for Encrypt Port",
+      go_next: "Go Next",
+      prev: "Go Prev",
+      info: "Not start port Then Port set to 0!",
+      share_alg: "Fee Alg",
+      timeloop: "Time Loop",
+      timeloop99: "Random",
+      fee_pool: "Fee Pool (tcp://ip:port)",
+      fee_wallet: "Fee Wallet (Full wallet start With 0x)",
+      fee_rate: "Fee Rate (0-100%)",
+      coin_not_choose:"Coin Not Select",
+      proxy_mode_not_select:"Proxy Model Must Selected",
+      proxy_server_name_not_set:"Proxy Service Name Must Set",
+      proxy_pool_not_set:"Proxy Pool Tcp Address Must Set",
+      proxy_port_all_stop:"Proxy Port Less Open one Port",
+      key_most_be_set:"Key Must Be set",
+      iv_most_be_set:"Iv Must Be set",
+    }
+  },
+  cn: {
+    menu: {
+      dashborad: "仪表盘",
+      crate_proxy: "创建代理",
+      online_proxy: "在线矿池",
+    },
+    system: {
+      login: "系统登录",
+      passworderror: "密码不能小于6位数",
+      logout: "退出登录",
+      password: "密码",
+    },
+    dashboard: {
+      open_pool: "开启矿池",
+      online_workers: "在线矿工",
+      total_hashrate: "总算力",
+      share_rate: "有效比",
+      start_time: "运行时间",
+      version: "版本号",
+    },
+    onlinepool: {
+      total_overview: "总/接受/拒绝/百分比",
+      total_fee_share: "抽水份额/百分比",
+      total_fee_hashrate: "抽水算力(预估)",
+      port: "端口TCP/SSL/加密",
+      mode: "运行模式",
+      pool: "池",
+      wallet: "钱包",
+      workername: "矿工名",
+      report_hashrate: "报告算力",
+      total_share: "总工作份额",
+      total_accept: "接受份额",
+      total_reject: "拒绝份额",
+      fee_accept: "抽水份额",
+      online_time: "在线时间",
+      last_share_time: "最后一次提交时间",
+    },
+    proxy: {
+      select: "请选择",
+      mode1: "纯中转",
+      mode2: "按比例抽水",
+      mode3: "统一钱包",
+      coin: "代理币种",
+      mode: "中转模式",
+      server_name: "服务名称（抽水矿工名全英文）",
+      port_pool: "代理矿池地址(格式tcp://IP:端口)",
+      tcp: "TCP端口",
+      ssl: "SSL端口",
+      encrypt: "加密端口",
+      encrypt_key: "加密协议key",
+      encrypt_iv: "加密协议向量偏移",
+      go_next: "下一步",
+      prev: "上一步",
+      info: "端口设置为0即不开启此端口",
+      share_alg: "抽水算法",
+      timeloop: "时间片算法(有小幅度曲线波动)",
+      timeloop99: "随机算法(无曲线波动)",
+      fee_pool: "抽水矿池(格式tcp://IP:端口)",
+      fee_wallet: "抽水钱包(包含0x部分)",
+      fee_rate: "抽水百分比(0-100%) 支持一位小数",
+      coin_not_choose:"中转币种未填写",
+      proxy_mode_not_select:"代理模式未选择",
+      proxy_server_name_not_set:"服务名称未填写",
+      proxy_pool_not_set:"代理矿池地址未填写",
+      proxy_port_all_stop:"代理服务必须开启一个端口，不可能全部关闭",
+      key_must_be_set:"秘钥必须设置，如果不使用加密协议。也必须设置，随便填些什么把",
+      iv_must_be_set:"向量必须设置，如果不使用加密协议。也必须设置，随便填些什么把",
+    }
+  },
+};
 
+// 通过选项创建 VueI18n 实例
+const i18n = new VueI18n({
+  locale: "en", // 设置地区
+  messages, // 设置地区信息
+});
 
-  export default i18n
+export default i18n;

@@ -229,7 +229,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>在线矿工</span>
+                  <span>{{ $t("dashboard.online_workers") }}</span>
                 </div>
                 <div class="text item">{{ current_server.online }}</div>
               </el-card>
@@ -240,7 +240,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>总算力</span>
+                  <span>{{ $t("dashboard.total_hashrate") }}</span>
                 </div>
                 <div class="text item">{{ current_server.total_hash }}</div>
               </el-card>
@@ -251,7 +251,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>总/接受/拒绝/百分比</span>
+                  <span>{{ $t("onlinepool.total_overview") }}</span>
                 </div>
                 <div class="text item">
                   {{ current_server.accept_index }}/{{
@@ -268,7 +268,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>端口TCP/SSL/加密</span>
+                  <span>{{ $t("onlinepool.port") }}</span>
                 </div>
                 <div class="text item">
                   {{ current_server.config.tcp_port }}/{{
@@ -285,7 +285,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>运行模式</span>
+                  <span>{{ $t("onlinepool.mode") }}</span>
                 </div>
                 <div class="text item">
                   <div v-if="current_server.config.share == 0">{{$t('proxy.mode1')}}</div>
@@ -300,7 +300,7 @@
             <div class="grid-content bg-purple">
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
-                  <span>池</span>
+                  <span>{{ $t("onlinepool.pool") }}</span>
                 </div>
                 <div class="text item">
                   <div>{{ current_server.config.pool_address[0] }}</div>

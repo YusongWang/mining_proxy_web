@@ -4,14 +4,10 @@
       <el-form ref="form" :model="form" label-width="300px">
         <el-row>
           <el-col :span="12" :offset="6" v-if="active == 1">
-            <el-alert
-              title="注： 统一钱包功能说明：支持不通矿池不同内核代理到一个矿池的一个钱包 等于抽百分之百)"
-              type="info"
-            ></el-alert>
             <div style="margin: 30px"></div>
 
-            <el-form-item label="代理币种">
-              <el-select v-model="form.coin" placeholder="请选择">
+            <el-form-item :label="$t('proxy.coin')">
+              <el-select v-model="form.coin" :placeholder="$t('proxy.select')">
                 <el-option
                   v-for="item in options"
                   :key="item.value"
@@ -22,18 +18,19 @@
               </el-select>
             </el-form-item>
 
-            <el-form-item label="中转模式">
+            <el-form-item :label="$t('proxy.mode')">
               <el-select v-model="form.share" :placeholder="$t('proxy.select')">
-                <el-option value="0" selected :label="$t('proxy.mode1')"> </el-option>
+                <el-option value="0" selected :label="$t('proxy.mode1')">
+                </el-option>
                 <el-option value="1" :label="$t('proxy.mode2')"> </el-option>
                 <el-option value="2" :label="$t('proxy.mode3')"></el-option>
               </el-select>
             </el-form-item>
-            <el-form-item label="服务名称（抽水矿工名全英文）">
+            <el-form-item :label="$t('proxy.server_name')">
               <el-input v-model="form.name" value="ProxyFee" />
             </el-form-item>
 
-            <el-form-item label="代理矿池地址(格式tcp://IP:端口)">
+            <el-form-item :label="$t('proxy.port_pool')">
               <el-input v-model="form.pool_address" />
             </el-form-item>
 
@@ -42,66 +39,67 @@
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="6" v-if="active == 2">
-            <el-alert
-              title="注： 端口设置为0即不开启此端口"
-              type="info"
-            ></el-alert>
+            <el-alert :title="$t('proxy.info')" type="info"></el-alert>
             <div style="margin: 30px"></div>
 
             <!-- 矿池端口设置 -->
-            <el-form-item label="TCP端口">
+            <el-form-item :label="$t('proxy.tcp')">
               <el-input v-model="form.tcp_port" type="number" />
             </el-form-item>
 
-            <el-form-item label="SSL端口">
+            <el-form-item :label="$t('proxy.ssl')">
               <el-input v-model="form.ssl_port" type="number" />
             </el-form-item>
 
-            <el-form-item label="加密端口">
+            <el-form-item :label="$t('proxy.encrypt')">
               <el-input v-model="form.encrypt_port" type="number" />
             </el-form-item>
-            <el-form-item label="加密协议key">
+            <el-form-item :label="$t('proxy.encrypt_key')">
               <el-input v-model="form.key" />
             </el-form-item>
 
-            <el-form-item label="加密协议向量偏移">
+            <el-form-item :label="$t('proxy.encrypt_iv')">
               <el-input v-model="form.iv" />
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" @click="next2">下一步</el-button>
-              <el-button @click="prev">上一步</el-button>
+              <el-button type="primary" @click="next2">{{
+                $t("proxy.go_next")
+              }}</el-button>
+              <el-button @click="prev">{{ $t("proxy.prev") }}</el-button>
             </el-form-item>
           </el-col>
 
           <el-col :span="12" :offset="6" v-if="active == 3">
-            <el-form-item label="抽水算法">
-              <el-select v-model="form.share_alg" placeholder="请选择">
-                <el-option
-                  value="0"
-                  selected
-                  label="时间片算法(有小幅度曲线波动)"
-                >
+            <el-form-item :label="$t('proxy.share_alg')">
+              <el-select
+                v-model="form.share_alg"
+                :placeholder="$t('proxy.select')"
+              >
+                <el-option value="0" selected :label="$t('proxy.timeloop')">
                 </el-option>
-                <el-option value="99" label="随机算法(无曲线波动)"> </el-option>
+                <el-option value="99" :label="$t('proxy.timeloop99')">
+                </el-option>
               </el-select>
             </el-form-item>
             <!-- 抽水钱包设置 -->
-            <el-form-item label="抽水矿池(格式tcp://IP:端口)">
+            <el-form-item :label="$t('proxy.fee_pool')">
               <el-input v-model="form.share_address" />
             </el-form-item>
 
-            <el-form-item label="抽水钱包(包含0x部分)">
+            <el-form-item :label="$t('proxy.fee_wallet')">
               <el-input v-model="form.share_wallet" />
             </el-form-item>
 
-            <el-form-item label="抽水百分比(0-100%) 支持一位小数">
+            <el-form-item :label="$t('proxy.fee_rate')">
               <el-input v-model="form.share_rate" type="float" />
             </el-form-item>
 
             <el-form-item>
-              <el-button type="primary" @click="next3">下一步</el-button>
-              <el-button @click="prev">上一步</el-button>
+              <el-button type="primary" @click="next3">{{
+                $t("proxy.go_next")
+              }}</el-button>
+              <el-button @click="prev">{{ $t("proxy.prev") }}</el-button>
             </el-form-item>
           </el-col>
           <el-col :span="12" :offset="6" v-if="active == 4"> 4 </el-col>
@@ -167,22 +165,22 @@ export default {
     },
     next1() {
       if (this.form.coin == undefined) {
-        this.$message("中转币种未填写");
+        this.$message(this.$i18n.t("proxy.coin_not_choose"));
         return false;
       }
 
       if (this.form.share == undefined) {
-        this.$message("代理模式未选择");
+        this.$message(this.$i18n.t("proxy.proxy_mode_not_select"));
         return false;
       }
 
       if (this.form.name == "") {
-        this.$message("服务名称未填写");
+        this.$message(this.$i18n.t("proxy.proxy_server_name_not_set"));
         return false;
       }
 
       if (this.form.pool_address == "") {
-        this.$message("代理矿池地址未填写");
+        this.$message(this.$i18n.t("proxy.proxy_pool_not_set"));
         return false;
       }
 
@@ -194,21 +192,17 @@ export default {
         this.form.ssl_port == 0 &&
         this.form.encrypt_port == 0
       ) {
-        this.$message("代理服务必须开启一个端口，不可能全部关闭");
+        this.$message(this.$i18n.t("proxy.proxy_port_all_stop"));
         return false;
       }
 
       if (this.form.key == "") {
-        this.$message(
-          "秘钥必须设置，如果不使用加密协议。也必须设置，随便填些什么把"
-        );
+        this.$message(this.$i18n.t("proxy.key_most_be_set"));
         return false;
       }
 
       if (this.form.iv == "") {
-        this.$message(
-          "向量必须设置，如果不使用加密协议。也必须设置，随便填些什么把"
-        );
+        this.$message(this.$i18n.t("proxy.iv_most_be_set"));
         return false;
       }
       if (this.form.share == 0) {
